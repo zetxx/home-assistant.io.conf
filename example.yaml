@@ -1,0 +1,273 @@
+homeassistant:
+  customize:
+    sensor.air_purifier_office_aqi:
+      icon: mdi:weather-fog
+    sensor.air_purifier_office_humidity:
+      device_class: humidity
+    sensor.air_purifier_office_temerature:
+      device_class: temperature
+    sensor.air_purifier_office_mode:
+      icon: mdi:transition
+    sensor.air_purifier_office_favorite_level:
+      icon: mdi:weather-windy
+
+fan:
+  - platform: xiaomi_miio
+    host: 10.0.40.14
+    token: !secret xiaomi_air_purifier_office
+    name: Xiaomi Air Purifier Office
+
+group:
+  air_purifier_office:
+    name: Air purifier
+    view: no
+    entities:
+      - fan.xiaomi_air_purifier_office
+      - input_select.xiaomi_air_purifier_mode_office
+      - sensor.air_purifier_office_mode
+      - input_number.xiaomi_air_purifier_favorite_level_office
+      - sensor.air_purifier_office_favorite_level
+      - sensor.air_purifier_office_aqi
+      - sensor.air_purifier_office_temperature
+      - sensor.air_purifier_office_humidity
+  automation_office:
+    name: Office
+    view: no
+    icon: mdi:robot
+    entities:
+      - automation.set_favorite_fan_speed_for_air_purifier_office
+      - automation.set_state_for_air_purifier_office_favorite_level_input
+      - automation.set_state_for_air_purifier_office_mode_input
+      - automation.turn_off_air_purifier_office
+      - automation.turn_on_air_purifier_office
+
+input_number:
+  xiaomi_air_purifier_favorite_level_office:
+    name: Favorite level
+    icon: mdi:weather-windy
+    initial: 0
+    min: 0
+    max: 14
+    step: 1
+
+input_select:
+  xiaomi_air_purifier_mode_office:
+    name: Mode
+    icon: mdi:transition
+    options:
+    - auto
+    - favorite
+    - silent
+    - idle
+
+sensor:
+  - platform: template
+    sensors:
+      air_purifier_office_mode:
+        value_template: '{{ states.fan.xiaomi_air_purifier_office.attributes.mode }}'
+  - platform: template
+    sensors:
+      air_purifier_office_favorite_level:
+        value_template: '{{ states.fan.xiaomi_air_purifier_office.attributes.favorite_level }}'
+  - platform: template
+    sensors:
+      air_purifier_office_aqi:
+        value_template: '{{ states.fan.xiaomi_air_purifier_office.attributes.aqi }}'
+        unit_of_measurement: "µg/m3"
+  - platform: template
+    sensors:
+      air_purifier_office_temperature:
+        value_template: '{{ states.fan.xiaomi_air_purifier_office.attributes.temperature }}'
+        unit_of_measurement: "°C"
+  - platform: template
+    sensors:
+      air_purifier_office_humidity:
+        value_template: '{{ states.fan.xiaomi_air_purifier_office.attributes.humidity }}'
+        unit_of_measurement: "%"
+  - platform: template
+    sensors:
+      air_purifier_office_child_lock:
+        value_template: '{{ states.fan.xiaomi_air_purifier_office.attributes.child_lock }}'
+  - platform: template
+    sensors:
+      air_purifier_office_led:
+        value_template: '{{ states.fan.xiaomi_air_purifier_office.attributes.led }}'
+  - platform: template
+    sensors:
+      air_purifier_office_buzzer:
+        value_template: '{{ states.fan.xiaomi_air_purifier_office.attributes.buzzer }}'
+
+switch:
+  - platform: template
+    switches:
+      air_purifier_child_lock_office:
+        friendly_name: "Blokada"
+        value_template: "{{ is_state('sensor.air_purifier_office_child_lock', 'True') }}"
+        turn_on:
+          service: fan.xiaomi_miio_set_child_lock_on
+          data:
+            entity_id: fan.xiaomi_air_purifier_office
+        turn_off:
+          service: fan.xiaomi_miio_set_child_lock_off
+          data:
+            entity_id: fan.xiaomi_air_purifier_office
+        icon_template: >-
+                  {% if is_state('sensor.air_purifier_office_child_lock', 'True') %}
+                    mdi:lock
+                  {% else %}
+                    mdi:lock-open
+                  {% endif %}
+  - platform: template
+    switches:
+      air_purifier_led_office:
+        friendly_name: "Led"
+        value_template: "{{ is_state('sensor.air_purifier_office_led', 'True') }}"
+        turn_on:
+          service: fan.xiaomi_miio_set_led_on
+          data:
+            entity_id: fan.xiaomi_air_purifier_office
+        turn_off:
+          service: fan.xiaomi_miio_set_led_off
+          data:
+            entity_id: fan.xiaomi_air_purifier_office
+        icon_template: >-
+                  {% if is_state('sensor.air_purifier_office_led', 'True') %}
+                    mdi:led-off
+                  {% else %}
+                    mdi:led-on
+                  {% endif %}
+  - platform: template
+    switches:
+      air_purifier_buzzer_office:
+        friendly_name: "Dzwięk"
+        value_template: "{{ is_state('sensor.air_purifier_office_buzzer', 'True') }}"
+        turn_on:
+          service: fan.xiaomi_miio_set_buzzer_on
+          data:
+            entity_id: fan.xiaomi_air_purifier_office
+        turn_off:
+          service: fan.xiaomi_miio_set_buzzer_off
+          data:
+            entity_id: fan.xiaomi_air_purifier_office
+        icon_template: >-
+                  {% if is_state('sensor.air_purifier_office_buzzer', 'True') %}
+                    mdi:volume-high
+                  {% else %}
+                    mdi:volume-mute
+                  {% endif %}
+
+automation:
+  # Set input states when HA starts
+  - alias: Set state for air purifier office mode input
+    trigger:
+      - platform: homeassistant
+        event: start
+      - platform: state
+        entity_id: sensor.xiaomi_air_purifier_mode_office
+    action:
+      service: input_select.select_option
+      data_template:
+        entity_id: input_select.air_purifier_mode_office
+        option: '{{ states.fan.xiaomi_air_purifier_office.attributes.mode }}'
+  - alias: Set state for air purifier office favorite level input
+    trigger:
+      - platform: homeassistant
+        event: start
+      - platform: state
+        entity_id: sensor.xiaomi_air_purifier_favorite_level_office
+    action:
+      service: input_number.set_value
+      data_template:
+        entity_id: input_number.air_purifier_favorite_level_office
+        value: '{{ states.fan.xiaomi_air_purifier_office.attributes.favorite_level | int }}'
+  # Inputs
+  - alias: Air purifier mode office
+    trigger:
+      platform: state
+      entity_id: input_select.xiaomi_air_purifier_mode_office
+    action:
+      - service: fan.set_speed
+        data_template:
+          entity_id: fan.xiaomi_air_purifier_office
+          speed: '{{ states.input_select.xiaomi_air_purifier_mode_office.state }}'
+  - alias: Air purifier favorite level office
+    trigger:
+      platform: state
+      entity_id: input_number.xiaomi_air_purifier_favorite_level_office
+    action:
+      - service: fan.xiaomi_miio_set_favorite_level
+        data_template:
+          entity_id: fan.xiaomi_air_purifier_office
+          level: '{{ states.input_number.xiaomi_air_purifier_favorite_level_office.state | int }}'
+  # Automatic control
+  - alias: Turn off air purifier office
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.office_pm_2_5
+      value_template: "{{ states('sensor.office_pm_2_5') | int }}"
+      below: 5
+      for:
+        minutes: 10
+    condition:
+      - condition: state
+        entity_id: 'fan.xiaomi_air_purifier_office'
+        state: 'on'
+    action:
+      service: fan.turn_off
+      entity_id: fan.xiaomi_air_purifier_office
+  - alias: Turn on air purifier office
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.office_pm_2_5
+      value_template: "{{ states('sensor.office_pm_2_5') | int }}"
+      above: 5
+      for:
+        minutes: 5
+    condition:
+      - condition: state
+        entity_id: 'fan.xiaomi_air_purifier_office'
+        state: 'off'
+    action:
+      - service: fan.turn_on
+        entity_id: fan.xiaomi_air_purifier_office
+      - service: fan.speed
+        entity_id: fan.xiaomi_air_purifier_office
+        data:
+          speed: auto
+  - alias: Set favorite fan speed for air purifier office
+    trigger:
+      platform: time_pattern
+      minutes: '/5'
+      seconds: 00
+    condition:
+      - condition: state
+        entity_id: 'fan.xiaomi_air_purifier_office'
+        state: 'on'
+    action:
+      - service: fan.set_speed
+        entity_id: fan.xiaomi_air_purifier_office
+        data:
+          speed: favorite
+      - service: fan.xiaomi_miio_set_favorite_level
+        data_template:
+          entity_id: fan.xiaomi_air_purifier_office
+          level: >
+              {% if states('sensor.office_pm_2_5') | int > 30 or states('sensor.office_pm_10') | int > 50 %}
+                10
+              {% elif states('sensor.office_pm_2_5') | int > 20 or states('sensor.office_pm_10') | int > 40 %}
+                5
+              {% elif states('sensor.office_pm_2_5') | int > 10 or states('sensor.office_pm_10') | int > 20 %}
+                3
+              {% elif states('sensor.office_pm_2_5') | int > 5 or states('sensor.office_pm_10') | int > 10 %}
+                1
+              {% else %}
+                0
+              {% endif %}
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.xiaomi_air_purifier_mode_office
+          option: '{{ states.fan.xiaomi_air_purifier_office.attributes.mode }}'
+      - service: input_number.set_value
+        data_template:
+          entity_id: input_number.xiaomi_air_purifier_favorite_level_office
+          value: '{{ states.fan.xiaomi_air_purifier_office.attributes.favorite_level }}'

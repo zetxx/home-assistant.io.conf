@@ -1,0 +1,57 @@
+- platform: template
+  switches:
+    mi_1_switch_child_lock:
+      friendly_name: "Child Lock"
+      value_template: "{{ is_state('sensor.mi_1_sensor_child_lock', 'True') }}"
+      turn_on:
+        service: fan.xiaomi_miio_set_child_lock_on
+        data:
+          entity_id: fan.xiaomi_air_purifier_2s_1
+      turn_off:
+        service: fan.xiaomi_miio_set_child_lock_off
+        data:
+          entity_id: fan.xiaomi_air_purifier_2s_1
+      icon_template: >-
+                {% if is_state('sensor.mi_1_sensor_child_lock', 'True') %}
+                  mdi:lock
+                {% else %}
+                  mdi:lock-open
+                {% endif %}
+- platform: template
+  switches:
+    mi_1_switch_led:
+      friendly_name: "Led"
+      value_template: "{{ is_state('sensor.mi_1_sensor_led', 'True') }}"
+      turn_on:
+        service: fan.xiaomi_miio_set_led_on
+        data:
+          entity_id: fan.xiaomi_air_purifier_2s_1
+      turn_off:
+        service: fan.xiaomi_miio_set_led_off
+        data:
+          entity_id: fan.xiaomi_air_purifier_2s_1
+      icon_template: >-
+                {% if is_state('sensor.mi_1_sensor_led', 'True') %}
+                  mdi:led-off
+                {% else %}
+                  mdi:led-on
+                {% endif %}
+- platform: template
+  switches:
+    mi_1_switch_buzzer:
+      friendly_name: "Buzzer"
+      value_template: "{{ is_state('sensor.mi_1_sensor_buzzer', 'True') }}"
+      turn_on:
+        service: fan.xiaomi_miio_set_buzzer_on
+        data:
+          entity_id: fan.xiaomi_air_purifier_2s_1
+      turn_off:
+        service: fan.xiaomi_miio_set_buzzer_off
+        data:
+          entity_id: fan.xiaomi_air_purifier_2s_1
+      icon_template: >-
+                {% if is_state('sensor.mi_1_sensor_buzzer', 'True') %}
+                  mdi:volume-high
+                {% else %}
+                  mdi:volume-mute
+                {% endif %}

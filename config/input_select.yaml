@@ -1,0 +1,7 @@
+mi_1_input_select_mode:
+  name: Mode
+  icon: mdi:transition
+  options:
+  - Auto
+  - Silent
+  - Favorite

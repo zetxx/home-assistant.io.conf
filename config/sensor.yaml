@@ -1,0 +1,47 @@
+- platform: template
+  sensors:
+    mi_1_sensor_aqi:
+      friendly_name: "Air quality index"
+      value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.aqi }}"
+      unit_of_measurement: "μg/m³"
+      icon_template: "mdi:weather-fog"
+    mi_1_sensor_average_aqi:
+      friendly_name: "Air quality avg"
+      value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.average_aqi }}"
+      unit_of_measurement: "μg/m³"
+      icon_template: "mdi:weather-fog"
+    mi_1_sensor_humidity:
+      friendly_name: "Humidity"
+      unit_of_measurement: '%'
+      value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.humidity }}"
+      device_class: "humidity"
+    mi_1_sensor_temperature:
+      friendly_name: "Temperature"
+      unit_of_measurement: '°C'
+      value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.temperature }}"
+      device_class: "temperature"
+    mi_1_sensor_mode:
+      friendly_name: "Mode"
+      value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.mode }}"
+    mi_1_sensor_speed:
+      friendly_name: "Fan speed"
+      value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.motor_speed }}"
+      unit_of_measurement: "rpm"
+      icon_template: "mdi:speedometer"
+    mi_1_sensor_filter_remaining:
+      friendly_name: "Filter remaining"
+      value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.filter_life_remaining }}"
+      unit_of_measurement: "%"
+      icon_template: "mdi:heart-outline"
+    mi_1_sensor_favorite_level:
+      friendly_name: "Favorite Level"
+      value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.favorite_level }}"
+    mi_1_sensor_child_lock:
+      friendly_name: "Child Lock"
+      value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.child_lock }}"
+    mi_1_sensor_led:
+      friendly_name: "led"
+      value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.led }}"
+    mi_1_sensor_buzzer:
+      friendly_name: "led"
+      value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.buzzer }}"

@@ -1,0 +1,46 @@
+homeassistant:
+  name: Home
+  unit_system: metric
+  time_zone: Europe/Sofia
+  temperature_unit: C
+  latitude: 42.698334
+  longitude: 23.319941
+  elevation: 500
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+config:
+
+system_health:
+
+lovelace:
+  mode: yaml
+
+http:
+  server_port: 8123
+  ssl_certificate: /config/ssl/fullchain.pem
+  ssl_key: /config/ssl/privkey.pem
+  base_url: mi-air-pure-1
+  ip_ban_enabled: False
+
+discovery:
+history:
+logbook:
+
+fan:
+  - platform: xiaomi_miio
+    host: 10.100.101.97
+    token: !env_var token_pu_1
+    name: "xiaomi.air.purifier.2s.1" # fan.xiaomi_air_purifier_2s_1
+    model: zhimi.airpurifier.mc1
+
+sensor: !include config/sensor.yaml
+
+switch: !include config/switch.yaml
+
+input_number: !include config/input_number.yaml
+
+input_select: !include config/input_select.yaml
+
+automation: !include config/automation.yaml

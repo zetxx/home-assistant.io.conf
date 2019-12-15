@@ -1,0 +1,7 @@
+mi_1_input_number_favorite_level:
+  name: Favorite level
+  icon: mdi:weather-windy
+  initial: 0
+  min: 0
+  max: 14
+  step: 1

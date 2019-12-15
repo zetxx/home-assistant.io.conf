@@ -1,0 +1,31 @@
+views:
+  - title: Air Purifier 1
+    theme: dark-mode
+    cards:
+      - title: Air Purifier 1 Current State
+        type: entities
+        entities:
+          - input_number.mi_1_input_number_favorite_level
+          - input_select.mi_1_input_select_mode
+          - sensor.mi_1_sensor_aqi
+          - sensor.mi_1_sensor_humidity
+          - sensor.mi_1_sensor_temperature
+          - sensor.mi_1_sensor_mode
+          - sensor.mi_1_sensor_speed
+          - sensor.mi_1_sensor_favorite_level
+          - sensor.mi_1_sensor_filter_remaining
+        show_header_toggle: false
+        theme: default
+
+      - title: Air Purifier 1 History State
+        entities:
+            - sensor.mi_1_sensor_aqi
+            - sensor.mi_1_sensor_humidity
+            - sensor.mi_1_sensor_temperature
+            - sensor.mi_1_sensor_mode
+            - sensor.mi_1_sensor_speed
+            - sensor.mi_1_sensor_filter_remaining
+        show_header_toggle: false
+        hours_to_show: 80
+        refresh_interval: 60
+        type: history-graph
