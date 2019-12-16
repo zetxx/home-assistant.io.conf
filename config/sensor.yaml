@@ -45,3 +45,10 @@
     mi_1_sensor_buzzer:
       friendly_name: "led"
       value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.buzzer }}"
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+    - 'date_time'
+    - 'time_date'
+    - 'time_utc'

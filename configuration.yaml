@@ -11,10 +11,11 @@ frontend:
   themes: !include_dir_merge_named themes
 
 config:
-
 system_health:
+discovery:
+history:
+logbook:
 
-time_date:
 
 lovelace:
   mode: yaml
@@ -25,10 +26,6 @@ http:
   ssl_key: /config/ssl/privkey.pem
   base_url: mi-air-pure-1
   ip_ban_enabled: False
-
-discovery:
-history:
-logbook:
 
 fan:
   - platform: xiaomi_miio
