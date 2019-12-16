@@ -14,6 +14,8 @@ config:
 
 system_health:
 
+time_date:
+
 lovelace:
   mode: yaml
 
