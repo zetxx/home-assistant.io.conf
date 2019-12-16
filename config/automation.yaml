@@ -45,7 +45,7 @@
     platform: numeric_state
     entity_id: sensor.mi_1_sensor_aqi
     value_template: "{{ states('sensor.mi_1_sensor_aqi') | int }}"
-    below: 5
+    below: 20
     for:
       minutes: 10
   condition:
@@ -60,7 +60,7 @@
     platform: numeric_state
     entity_id: sensor.mi_1_sensor_aqi
     value_template: "{{ states('sensor.mi_1_sensor_aqi') | int }}"
-    above: 5
+    above: 20
     for:
       minutes: 5
   condition:
@@ -73,7 +73,7 @@
     - service: fan.speed
       entity_id: fan.xiaomi_air_purifier_2s_1
       data:
-        speed: auto
+        speed: Silent
 - alias: Set favorite fan speed for air purifier
   trigger:
     platform: time_pattern
@@ -98,9 +98,9 @@
             {% if states('sensor.mi_1_sensor_aqi') | int > 80 %}
               14
             {% elif states('sensor.mi_1_sensor_aqi') | int > 40 %}
-              7
+              10
             {% elif states('sensor.mi_1_sensor_aqi') | int > 20 %}
-              1
+              7
             {% else %}
               0
             {% endif %}
@@ -112,3 +112,28 @@
       data_template:
         entity_id: input_number.mi_1_input_number_favorite_level
         value: '{{ states.fan.xiaomi_air_purifier_2s_1.attributes.favorite_level }}'
+- alias: Set Silent air purifier
+  trigger:
+    platform: time_pattern
+    minutes: '/30'
+    seconds: 00
+  condition:
+    - condition: time
+      after: '23:01:00'
+      before: '06:00:00'
+    - condition: state
+      entity_id: 'fan.xiaomi_air_purifier_2s_1'
+      state: 'on'
+  action:
+    - service: fan.set_speed
+      entity_id: fan.xiaomi_air_purifier_2s_1
+      data:
+        speed: Silent
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.mi_1_input_select_mode
+        option: '{{ states.fan.xiaomi_air_purifier_2s_1.attributes.mode }}'
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.mi_1_input_number_favorite_level
+        value: 1

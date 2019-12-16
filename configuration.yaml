@@ -12,7 +12,7 @@ frontend:
 
 config:
 system_health:
-discovery:
+#discovery:
 history:
 logbook:
 
