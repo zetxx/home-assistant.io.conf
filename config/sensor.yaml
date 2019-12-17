@@ -45,6 +45,26 @@
     mi_1_sensor_buzzer:
       friendly_name: "led"
       value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.buzzer }}"
+    plug1_current_a:
+      friendly_name_template: "{{ states.switch.plug1.name }} Current"
+      value_template: '{{ states.switch.plug1.attributes.current_a | float }}'
+      unit_of_measurement: 'A'
+    plug1_current_power_w:
+      friendly_name_template: "{{ states.switch.plug1.name }} Current Consumption"
+      value_template: '{{ states.switch.plug1.attributes.current_power_w | float }}'
+      unit_of_measurement: 'W'
+    plug1_total_energy_kwh:
+      friendly_name_template: "{{ states.switch.plug1.name }} Total Consumption"
+      value_template: '{{ states.switch.plug1.attributes.total_energy_kwh | float }}'
+      unit_of_measurement: 'kWh'
+    plug1_voltage:
+      friendly_name_template: "{{ states.switch.plug1.name }} Voltage"
+      value_template: '{{ states.switch.plug1.attributes.voltage | float }}'
+      unit_of_measurement: 'V'
+    plug1_today_energy_kwh:
+      friendly_name_template: "{{ states.switch.plug1.name }} Today's Consumption"
+      value_template: '{{ states.switch.plug1.attributes.today_energy_kwh | float }}'
+      unit_of_measurement: 'kWh'
 - platform: time_date
   display_options:
     - 'time'
