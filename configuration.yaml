@@ -35,6 +35,8 @@ fan:
     name: "xiaomi.air.purifier.2s.1" # fan.xiaomi_air_purifier_2s_1
     model: zhimi.airpurifier.mc1
 
+tplink: !include config/tplink.yaml
+
 sensor: !include config/sensor.yaml
 
 switch: !include config/switch.yaml
