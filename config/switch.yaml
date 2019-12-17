@@ -55,5 +55,3 @@
                 {% else %}
                   mdi:volume-mute
                 {% endif %}
-- platform: tplink
-  host: 10.100.101.82
