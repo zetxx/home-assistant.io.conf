@@ -15,10 +15,9 @@ views:
           - switch.mi_1_switch_buzzer
           - switch.mi_1_switch_child_lock
           - switch.mi_1_switch_led
-          - weather.home
+          - weather.sf
         show_header_toggle: false
         theme: default
-
       - title: Air Purifier 1 History State
         entities:
             - sensor.mi_1_sensor_aqi
@@ -27,6 +26,16 @@ views:
             - sensor.mi_1_sensor_mode
             - sensor.mi_1_sensor_speed
             - sensor.mi_1_sensor_filter_remaining
+            - sensor.plug1_voltage
+        show_header_toggle: false
+        hours_to_show: 80
+        refresh_interval: 60
+        type: history-graph
+      - title: Plug 1 History State
+        entities:
+            - sensor.plug1_voltage
+            - sensor.plug1_current_power_w
+            - sensor.plug1_current_a
         show_header_toggle: false
         hours_to_show: 80
         refresh_interval: 60
