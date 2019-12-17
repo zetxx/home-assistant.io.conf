@@ -73,7 +73,7 @@
     - service: fan.speed
       entity_id: fan.xiaomi_air_purifier_2s_1
       data:
-        speed: Silent
+        speed: silent
 - alias: Set favorite fan speed for air purifier
   trigger:
     platform: time_pattern
@@ -90,7 +90,7 @@
     - service: fan.set_speed
       entity_id: fan.xiaomi_air_purifier_2s_1
       data:
-        speed: Favorite
+        speed: favorite
     - service: xiaomi_miio.fan_set_favorite_level
       data_template:
         entity_id: fan.xiaomi_air_purifier_2s_1
@@ -128,7 +128,7 @@
     - service: fan.set_speed
       entity_id: fan.xiaomi_air_purifier_2s_1
       data:
-        speed: Silent
+        speed: silent
     - service: input_select.select_option
       data_template:
         entity_id: input_select.mi_1_input_select_mode
