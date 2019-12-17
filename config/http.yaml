@@ -1,0 +1,5 @@
+server_port: 8123
+ssl_certificate: /config/ssl/fullchain.pem
+ssl_key: /config/ssl/privkey.pem
+base_url: mi-air-pure-1
+ip_ban_enabled: False
