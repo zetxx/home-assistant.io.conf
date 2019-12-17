@@ -10,10 +10,12 @@ views:
           - sensor.mi_1_sensor_aqi
           - sensor.mi_1_sensor_humidity
           - sensor.mi_1_sensor_temperature
-          - sensor.mi_1_sensor_mode
           - sensor.mi_1_sensor_speed
-          - sensor.mi_1_sensor_favorite_level
           - sensor.mi_1_sensor_filter_remaining
+          - switch.mi_1_switch_buzzer
+          - switch.mi_1_switch_child_lock
+          - switch.mi_1_switch_led
+          - weather.home
         show_header_toggle: false
         theme: default
 

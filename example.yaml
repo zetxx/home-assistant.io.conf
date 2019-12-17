@@ -157,7 +157,7 @@ switch:
 
 automation:
   # Set input states when HA starts
-  - alias: Set state for air purifier office mode input
+  - alias: Set state for air purifier mode input
     trigger:
       - platform: homeassistant
         event: start
@@ -168,7 +168,7 @@ automation:
       data_template:
         entity_id: input_select.air_purifier_mode_office
         option: '{{ states.fan.xiaomi_air_purifier_office.attributes.mode }}'
-  - alias: Set state for air purifier office favorite level input
+  - alias: Set state for air purifier favorite level input
     trigger:
       - platform: homeassistant
         event: start

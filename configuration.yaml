@@ -1,11 +1,4 @@
-homeassistant:
-  name: Home
-  unit_system: metric
-  time_zone: Europe/Sofia
-  temperature_unit: C
-  latitude: 42.698334
-  longitude: 23.319941
-  elevation: 500
+homeassistant: !include config/homeassistant.yaml
 
 frontend:
   themes: !include_dir_merge_named themes
