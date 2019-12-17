@@ -55,10 +55,9 @@ input_select:
     name: Mode
     icon: mdi:transition
     options:
-    - auto
-    - favorite
-    - silent
-    - idle
+    - Auto
+    - Favorite
+    - Silent
 
 sensor:
   - platform: template
@@ -247,7 +246,7 @@ automation:
       - service: fan.set_speed
         entity_id: fan.xiaomi_air_purifier_office
         data:
-          speed: favorite
+          speed: Favorite
       - service: fan.xiaomi_miio_set_favorite_level
         data_template:
           entity_id: fan.xiaomi_air_purifier_office

@@ -1,6 +1,7 @@
 ssl/**/*
 deps/**/*
 .storage/**/*
+.history/**/*
 .env
 .HA_VERSION
 home-assistant.log
