@@ -36,7 +36,7 @@
     platform: state
     entity_id: input_number.mi_1_input_number_favorite_level
   action:
-    - service: fan.xiaomi_miio_set_favorite_level
+    - service: xiaomi_miio.fan_set_favorite_level
       data_template:
         entity_id: fan.xiaomi_air_purifier_2s_1
         level: '{{ states.input_number.mi_1_input_number_favorite_level.state | int }}'
@@ -91,7 +91,7 @@
       entity_id: fan.xiaomi_air_purifier_2s_1
       data:
         speed: Favorite
-    - service: fan.xiaomi_miio_set_favorite_level
+    - service: xiaomi_miio.fan_set_favorite_level
       data_template:
         entity_id: fan.xiaomi_air_purifier_2s_1
         level: >
@@ -111,7 +111,7 @@
     - service: input_number.set_value
       data_template:
         entity_id: input_number.mi_1_input_number_favorite_level
-        value: '{{ states.fan.xiaomi_air_purifier_2s_1.attributes.favorite_level }}'
+        value: '{{ states.fan.xiaomi_air_purifier_2s_1.attributes.favorite_level | int }}'
 - alias: Set Silent air purifier
   trigger:
     platform: time_pattern
