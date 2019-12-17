@@ -8,7 +8,7 @@ system_health:
 #discovery:
 history:
 logbook:
-#mobile_app:
+mobile_app:
 
 
 lovelace:
