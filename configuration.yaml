@@ -28,19 +28,16 @@ http:
   base_url: mi-air-pure-1
   ip_ban_enabled: False
 
-fan:
+fan: !include config/fan.yaml
   - platform: xiaomi_miio
     host: "10.100.101.97"
     token: !env_var mi_1_token
     name: "xiaomi.air.purifier.2s.1" # fan.xiaomi_air_purifier_2s_1
     model: zhimi.airpurifier.mc1
+tplink: !include config/tplink.yaml
 
 sensor: !include config/sensor.yaml
-
 switch: !include config/switch.yaml
-
 input_number: !include config/input_number.yaml
-
 input_select: !include config/input_select.yaml
-
 automation: !include config/automation.yaml
