@@ -15,6 +15,7 @@ system_health:
 #discovery:
 history:
 logbook:
+mobile_app:
 
 
 lovelace:
