@@ -6,21 +6,14 @@ frontend:
 config:
 system_health:
 #discovery:
+#mobile_app:
 history:
 logbook:
-mobile_app:
-luftdaten:
-  sensor_id: 21229
-  show_on_map: true
-  sensors:
-    monitored_conditions:
-      - P1
-      - P2
-
 
 lovelace:
   mode: yaml
 
+luftdaten: !include config/luftdaten.yaml
 http: !include config/http.yaml
 fan: !include config/fan.yaml
 tplink: !include config/tplink.yaml
