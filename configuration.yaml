@@ -10,6 +10,8 @@ system_health:
 history:
 logbook:
 joaoapps_join:
+  api_key: !env_var join_api_key
+  device_id: !env_var join_device_id
 
 lovelace:
   mode: yaml
