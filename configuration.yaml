@@ -9,6 +9,7 @@ system_health:
 #mobile_app:
 history:
 logbook:
+joaoapps_join:
 
 lovelace:
   mode: yaml
