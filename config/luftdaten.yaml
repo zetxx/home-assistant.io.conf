@@ -1,0 +1,6 @@
+sensor_id: 21229
+show_on_map: true
+sensors:
+  monitored_conditions:
+    - P1
+    - P2
