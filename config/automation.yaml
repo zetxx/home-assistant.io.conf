@@ -81,7 +81,7 @@
     seconds: 00
   condition:
     - condition: time
-      after: '07:00:00'
+      after: '09:30:00'
       before: '23:00:00'
     - condition: state
       entity_id: 'fan.xiaomi_air_purifier_2s_1'
@@ -120,7 +120,7 @@
   condition:
     - condition: time
       after: '23:01:00'
-      before: '06:00:00'
+      before: '09:29:00'
     - condition: state
       entity_id: 'fan.xiaomi_air_purifier_2s_1'
       state: 'on'
