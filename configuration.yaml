@@ -17,6 +17,7 @@ luftdaten: !include config/luftdaten.yaml
 http: !include config/http.yaml
 fan: !include config/fan.yaml
 tplink: !include config/tplink.yaml
+notify: !include config/notify.yaml
 
 sensor: !include config/sensor.yaml
 switch: !include config/switch.yaml
