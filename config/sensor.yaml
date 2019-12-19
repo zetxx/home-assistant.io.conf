@@ -67,6 +67,8 @@
       friendly_name_template: "{{ states.switch.plug1.name }} Today's Consumption"
       value_template: '{{ states.switch.plug1.attributes.today_energy_kwh | float }}'
       unit_of_measurement: 'kWh'
+- platform: cert_expiry
+  host: belogradchik.biz
 - platform: time_date
   display_options:
     - 'time'
