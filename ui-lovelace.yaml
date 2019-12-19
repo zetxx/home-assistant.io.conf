@@ -1,5 +1,5 @@
 views:
-  - title: Air Purifier 1
+  - title: -
     theme: dark-mode
     cards:
       - title: Air Purifier 1 Current State
@@ -18,22 +18,15 @@ views:
           - weather.sf
         show_header_toggle: false
         theme: default
-      - title: Air Quality
-        entities:
-            - sensor.mi_1_sensor_aqi
-            - sensor.luftdaten_21229_p2
-        show_header_toggle: false
-        hours_to_show: 80
-        refresh_interval: 60
-        type: history-graph
       - title: Air Purifier 1 History State
         entities:
             - sensor.mi_1_sensor_aqi
-            - sensor.mi_1_sensor_humidity
-            - sensor.mi_1_sensor_temperature
-            - sensor.mi_1_sensor_mode
+            - sensor.luftdaten_21229_p2
             - sensor.mi_1_sensor_speed
             - sensor.mi_1_sensor_filter_remaining
+            - sensor.mi_1_sensor_mode
+            - sensor.mi_1_sensor_humidity
+            - sensor.mi_1_sensor_temperature
         show_header_toggle: false
         hours_to_show: 80
         refresh_interval: 60
