@@ -29,7 +29,6 @@ views:
       - title: Air Purifier 1 History State
         entities:
             - sensor.mi_1_sensor_aqi
-            - sensor.luftdaten_21229_p2
             - sensor.mi_1_sensor_humidity
             - sensor.mi_1_sensor_temperature
             - sensor.mi_1_sensor_mode
