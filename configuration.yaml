@@ -1,7 +1,6 @@
 homeassistant: !include config/homeassistant.yaml
 
-frontend:
-  themes: !include_dir_merge_named themes
+frontend: !include config/frontend.yaml
 
 config:
 system_health:
