@@ -1,5 +1,6 @@
 - platform: template
   sensors:
+    #mi_1
     mi_1_sensor_aqi:
       friendly_name: "Air quality index"
       value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.aqi }}"
@@ -45,6 +46,7 @@
     mi_1_sensor_buzzer:
       friendly_name: "led"
       value_template: "{{ states.fan.xiaomi_air_purifier_2s_1.attributes.buzzer }}"
+    #plug1
     plug1_current_a:
       friendly_name_template: "{{ states.switch.plug1.name }} Current"
       value_template: '{{ states.switch.plug1.attributes.current_a | float }}'
