@@ -15,7 +15,7 @@ views:
           - switch.mi_1_switch_buzzer
           - switch.mi_1_switch_child_lock
           - switch.mi_1_switch_led
-          - weather.sf
+          - weather.Sofia
         show_header_toggle: false
         theme: default
       - title: Air Purifier 1 History State
