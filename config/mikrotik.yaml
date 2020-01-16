@@ -1,0 +1,7 @@
+- host: 192.168.88.1
+  username: homeassistant
+  password: !env_var mikrotik_user_password
+  ssl: true
+  arp_ping: true
+  method: dhcp
+  track_devices: true
