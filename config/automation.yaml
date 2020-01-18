@@ -20,7 +20,8 @@
     service: input_number.set_value
     data_template:
       entity_id: input_number.mi_1_input_number_favorite_level
-      value: '{{ state_attr('fan.xiaomi_air_purifier_2s_1', 'favorite_level') | int }}'
+      value: >
+          {{ state_attr('fan.xiaomi_air_purifier_2s_1', 'favorite_level') | int }}
 # Inputs
 - alias: Air purifier mode
   trigger:
@@ -111,7 +112,8 @@
     - service: input_number.set_value
       data_template:
         entity_id: input_number.mi_1_input_number_favorite_level
-        value: '{{ state_attr('fan.xiaomi_air_purifier_2s_1', 'favorite_level') | int }}'
+        value: >
+            {{ state_attr('fan.xiaomi_air_purifier_2s_1', 'favorite_level') | int }}
 - alias: Set Silent air purifier
   trigger:
     platform: time_pattern
