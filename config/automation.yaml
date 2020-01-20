@@ -139,3 +139,26 @@
       data_template:
         entity_id: input_number.mi_1_input_number_favorite_level
         value: 1
+## NOTIFICATIONS
+- alias: Elin away
+  trigger:
+    platform: zone
+    event: leave
+    zone: zone.home
+    entity_id: device_tracker.elin-1p-6t
+  action:
+    - service: notify.op6
+      data_template:
+        message: 'elin left the house'
+        title: 'elin left the house'
+- alias: Elin away
+  trigger:
+    platform: zone
+    event: enter
+    zone: zone.home
+    entity_id: device_tracker.elin-1p-6t
+  action:
+    - service: notify.op6
+      data_template:
+        message: 'elin is in da house'
+        title: 'elin is in da house'
