@@ -1,4 +1,5 @@
 - platform: ping
   hosts:
-    google.com: google.com
+    cloudflare-dns: 1.1.1.1
+    google: google.com
     lan_client: 185.218.64.1
