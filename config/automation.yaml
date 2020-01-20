@@ -145,7 +145,7 @@
     platform: zone
     event: leave
     zone: zone.home
-    entity_id: device_tracker.elin-1p-6t
+    entity_id: device_tracker.elin_1p_6t
   action:
     - service: notify.op6
       data_template:
@@ -156,7 +156,7 @@
     platform: zone
     event: enter
     zone: zone.home
-    entity_id: device_tracker.elin-1p-6t
+    entity_id: device_tracker.elin_1p_6t
   action:
     - service: notify.op6
       data_template:
