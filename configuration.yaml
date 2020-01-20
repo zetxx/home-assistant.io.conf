@@ -22,6 +22,7 @@ tplink: !include config/tplink.yaml
 notify: !include config/notify.yaml
 mikrotik: !include config/mikrotik.yaml
 
+device_tracker: !include config/device_tracker.yaml
 sensor: !include config/sensor.yaml
 switch: !include config/switch.yaml
 input_number: !include config/input_number.yaml

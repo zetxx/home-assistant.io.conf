@@ -1,0 +1,4 @@
+- platform: ping
+  hosts:
+    google.com: google.com
+    lan_client: 185.218.64.1
