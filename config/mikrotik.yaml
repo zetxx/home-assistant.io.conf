@@ -1,4 +1,4 @@
-- host: zMTK
+- host: hr
   username: homeassistant
   password: !env_var mikrotik_user_password
   ssl: true
