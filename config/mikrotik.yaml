@@ -1,7 +1,8 @@
-- host: hr
+- host: 10.100.100.1
   username: homeassistant
+  port: 8729
   password: !env_var mikrotik_user_password
-  ssl: true
+  force_dhcp: true
   arp_ping: true
-  method: dhcp
-  track_devices: true
+  detection_time: 30
+  verify_ssl: true

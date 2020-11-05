@@ -1,5 +1,6 @@
-sensor_id: 21229
-show_on_map: true
+sensor_id: 18789
+show_on_map: false
+scan_interval: 600
 sensors:
   monitored_conditions:
     - P1

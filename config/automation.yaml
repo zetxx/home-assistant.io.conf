@@ -1,100 +1,57 @@
-# Set input states when HA starts
-- alias: Set state for air purifier mode input
-  trigger:
-    - platform: homeassistant
-      event: start
-    - platform: state
-      entity_id: sensor.mi_1_sensor_mode
-  action:
-    service: input_select.select_option
-    data_template:
-      entity_id: input_select.mi_1_input_select_mode
-      option: '{{ states.fan.xiaomi_air_purifier_2s_1.attributes.mode }}'
-- alias: Set state for air purifier favorite level input
-  trigger:
-    - platform: homeassistant
-      event: start
-    - platform: state
-      entity_id: sensor.mi_1_sensor_favorite_level
-  action:
-    service: input_number.set_value
-    data_template:
-      entity_id: input_number.mi_1_input_number_favorite_level
-      value: >
-          {{ state_attr('fan.xiaomi_air_purifier_2s_1', 'favorite_level') | int }}
-# Inputs
-- alias: Air purifier mode
+## NOTIFICATIONS
+- alias: Irina phone away
   trigger:
     platform: state
-    entity_id: input_select.mi_1_input_select_mode
+    entity_id: device_tracker.irina
+    from: 'not_home'
+    to: 'home'
   action:
-    - service: fan.set_speed
-      data_template:
-        entity_id: fan.xiaomi_air_purifier_2s_1
-        speed: '{{ states.input_select.mi_1_input_select_mode.state }}'
-- alias: Air purifier favorite level
-  trigger:
-    platform: state
-    entity_id: input_number.mi_1_input_number_favorite_level
-  action:
-    - service: xiaomi_miio.fan_set_favorite_level
-      data_template:
-        entity_id: fan.xiaomi_air_purifier_2s_1
-        level: '{{ states.input_number.mi_1_input_number_favorite_level.state | int }}'
-- alias: Turn off air purifier
+    - service: notify.op6_join
+      data:
+        message: 'elin left the house'
+        title: 'elin left the house'
+
+#fan.xiaomi_air_purifier_2s_1
+- alias: Turn OFF air purifier
   trigger:
     platform: numeric_state
     entity_id: sensor.mi_1_sensor_aqi
     value_template: "{{ states('sensor.mi_1_sensor_aqi') | int }}"
     below: 20
+    above: -1
     for:
       minutes: 10
-  condition:
-    - condition: state
-      entity_id: 'fan.xiaomi_air_purifier_2s_1'
-      state: 'on'
   action:
-    service: fan.turn_off
-    entity_id: fan.xiaomi_air_purifier_2s_1
-- alias: Turn on air purifier
+    - service: xiaomi_miio.fan_set_favorite_level
+      entity_id: fan.xiaomi_air_purifier_2s_1
+      data:
+        level: 0
+    - service: fan.turn_off
+      entity_id: fan.xiaomi_air_purifier_2s_1
+
+- alias: Turn ON air purifier (not quiet)
   trigger:
     platform: numeric_state
     entity_id: sensor.mi_1_sensor_aqi
     value_template: "{{ states('sensor.mi_1_sensor_aqi') | int }}"
-    above: 20
+    below: 99999
+    above: 21
     for:
       minutes: 5
   condition:
-    - condition: state
-      entity_id: 'fan.xiaomi_air_purifier_2s_1'
-      state: 'off'
+    - condition: time
+      before: '22:00:00'
+      after: '9:00:00'
   action:
     - service: fan.turn_on
       entity_id: fan.xiaomi_air_purifier_2s_1
-    - service: fan.speed
-      entity_id: fan.xiaomi_air_purifier_2s_1
-      data:
-        speed: silent
-- alias: Set favorite fan speed for air purifier
-  trigger:
-    platform: time_pattern
-    minutes: '/5'
-    seconds: 00
-  condition:
-    - condition: time
-      after: '09:30:00'
-      before: '23:00:00'
-    - condition: state
-      entity_id: 'fan.xiaomi_air_purifier_2s_1'
-      state: 'on'
-  action:
     - service: fan.set_speed
       entity_id: fan.xiaomi_air_purifier_2s_1
       data:
         speed: favorite
     - service: xiaomi_miio.fan_set_favorite_level
+      entity_id: fan.xiaomi_air_purifier_2s_1
       data_template:
-        entity_id: fan.xiaomi_air_purifier_2s_1
         level: >
             {% if states('sensor.mi_1_sensor_aqi') | int > 80 %}
               14
@@ -105,60 +62,28 @@
             {% else %}
               0
             {% endif %}
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.mi_1_input_select_mode
-        option: '{{ states.fan.xiaomi_air_purifier_2s_1.attributes.mode }}'
-    - service: input_number.set_value
-      data_template:
-        entity_id: input_number.mi_1_input_number_favorite_level
-        value: >
-            {{ state_attr('fan.xiaomi_air_purifier_2s_1', 'favorite_level') | int }}
-- alias: Set Silent air purifier
+
+- alias: Turn ON air purifier (quiet)
   trigger:
-    platform: time_pattern
-    minutes: '/30'
-    seconds: 00
+    platform: numeric_state
+    entity_id: sensor.mi_1_sensor_aqi
+    value_template: "{{ states('sensor.mi_1_sensor_aqi') | int }}"
+    above: 21
+    below: 99999
+    for:
+      minutes: 5
   condition:
     - condition: time
-      after: '23:01:00'
-      before: '09:29:00'
-    - condition: state
-      entity_id: 'fan.xiaomi_air_purifier_2s_1'
-      state: 'on'
+      after: '22:01:00'
+      before: '8:59:00'
   action:
+    - service: fan.turn_on
+      entity_id: fan.xiaomi_air_purifier_2s_1
     - service: fan.set_speed
       entity_id: fan.xiaomi_air_purifier_2s_1
       data:
         speed: silent
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.mi_1_input_select_mode
-        option: '{{ states.fan.xiaomi_air_purifier_2s_1.attributes.mode }}'
-    - service: input_number.set_value
-      data_template:
-        entity_id: input_number.mi_1_input_number_favorite_level
-        value: 1
-## NOTIFICATIONS
-- alias: Elin away
-  trigger:
-    platform: zone
-    event: leave
-    zone: zone.home
-    entity_id: device_tracker.elin_1p_6t
-  action:
-    - service: notify.op6
-      data_template:
-        message: 'elin left the house'
-        title: 'elin left the house'
-- alias: Elin away
-  trigger:
-    platform: zone
-    event: enter
-    zone: zone.home
-    entity_id: device_tracker.elin_1p_6t
-  action:
-    - service: notify.op6
-      data_template:
-        message: 'elin is in da house'
-        title: 'elin is in da house'
+    - service: xiaomi_miio.fan_set_favorite_level
+      entity_id: fan.xiaomi_air_purifier_2s_1
+      data:
+        level: 0
