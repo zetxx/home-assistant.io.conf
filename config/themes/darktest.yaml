@@ -1,0 +1,110 @@
+darktest:
+
+  # TEXT COLOURS ######################################
+
+  # Primary/secondary text colour usage in cards varies.
+
+  # Entity card:              primary for entity values, secondary for entity names
+  # Most other cards:         primary for titles, entity names and values
+  # History graph:            primary for titles and entity names, secondary for axis values
+  # Integration cards:        eg Weather - bespoke design - usually primary for main headings and values, secondary for sub headings
+
+  primary-text-color: "#e1e1e1"
+  secondary-text-color: "#6c8b9b"
+
+  # Text colour on HA buttons
+
+  text-primary-color: "#e1e1e1"                     # eg in developer tools
+  text-light-primary-color: "#1c1c1c"               # eg on user profile button at the bottom of the sidebar
+  disabled-text-color: "#bdbdbd"
+
+  # Header text
+
+  app-header-text-color: "#e1e1e1"
+
+  # Badges
+
+  label-badge-text-color: "#e1e1e1"
+
+  # Sidebar
+
+  sidebar-text-color: "#e1e1e1"                     # If omitted defaults to primary text colour
+  sidebar-selected-text-color: "#6c8b9b"            # If omitted defaults to secondary text colour
+
+  # BACKGROUND COLOURS ###############################
+
+  # Main display area
+
+  primary-background-color: "#111111"
+  card-background-color: "#1c1c1c"
+  secondary-background-color: "#585858"             # Behind current item in a dropdown list
+
+  # Sidebar
+
+  sidebar-background-color: "#1c1c1c"
+
+  # Header
+
+  app-header-background-color: "#1c1c1c"
+
+  # Badges
+
+  label-badge-background-color: "#1c1c1c"
+
+  # HA buttons
+
+  warning-color: "#FF9800"                          # In HA buttons like those in Developer Tools
+  success-color: "#0f9d58"
+  error-color: "#db4437"
+  info-color: "#4285f4"
+
+  # Tables
+
+  table-row-background-color: "#1c1c1c"
+  table-row-alternative-background-color: "#1c1c1c"
+
+
+  # ICONS AND SWITCHES ##############################
+
+  # State icons (on/off)
+
+  state-icon-color: "#44739e"
+  state-icon-active-color: "#ffff00"
+
+  # Sidebar icons
+
+  sidebar-icon-color: "#929292"
+  sidebar-selected-icon-color: "#44739e"            # The sidebar selected background colour is also derived from this
+
+  # Switches
+
+  switch-unchecked-button-color: "#929292"          # Off
+  switch-unchecked-track-color: "#9e9e9e"           # Colour of slider behind switch when off
+  switch-checked-color: "#03a9f4"                   # On
+  switch-checked-track-color: "#0288d1"             # Colour of slider behind switch when on
+
+
+  # HIGHLIGHT COLOURS ##############################
+
+  accent-color: "#ff9800"                           # eg Notification alert at bottom of sidebar and header icons in edit mode
+
+  # By default binary sensor badges appear outlined in in blue and all others in red.
+  # Errors are outlined in orange. This can be changed by substituting hex codes.
+
+  label-badge-red: "#df4c1e"
+  label-badge-blue: "#039be5"
+  label-badge-green: "#0da035"
+  label-badge-yellow: "#f4b400"
+
+  # MISC ###########################################
+
+  scrollbar-thumb-color: "#c2c2c2"
+  ha-card-border-radius: "3px"
+  divider-color: "#4c4c4c"                         # Line separating main screen from sidebar, gridlines on calendar.
+
+  # Main Interface Colors
+
+  primary-color: "#03a9f4"
+  dark-primary-color: "#0288d1"
+  light-primary-color: "#b3e5fC"
+
