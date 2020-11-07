@@ -34,14 +34,14 @@
     platform: numeric_state
     entity_id: sensor.mi_1_sensor_aqi
     value_template: "{{ states('sensor.mi_1_sensor_aqi') | int }}"
-    below: 99999
     above: 21
+    below: 99999
     for:
       minutes: 5
   condition:
     - condition: time
-      before: '22:00:00'
       after: '9:00:00'
+      before: '22:00:00'
   action:
     - service: fan.turn_on
       entity_id: fan.xiaomi_air_purifier_2s_1
@@ -79,6 +79,26 @@
   action:
     - service: fan.turn_on
       entity_id: fan.xiaomi_air_purifier_2s_1
+    - service: fan.set_speed
+      entity_id: fan.xiaomi_air_purifier_2s_1
+      data:
+        speed: silent
+    - service: xiaomi_miio.fan_set_favorite_level
+      entity_id: fan.xiaomi_air_purifier_2s_1
+      data:
+        level: 0
+
+- alias: Turn ON air purifier (quiet - was noisy)
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.mi_1_sensor_favorite_level
+    value_template: "{{ states('sensor.mi_1_sensor_favorite_level') | int }}"
+    above: 0
+  condition:
+    - condition: time
+      after: '22:01:00'
+      before: '8:59:00'
+  action:
     - service: fan.set_speed
       entity_id: fan.xiaomi_air_purifier_2s_1
       data:
