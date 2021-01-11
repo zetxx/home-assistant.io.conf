@@ -21,7 +21,7 @@
   switches:
     mi_1_switch_led:
       friendly_name: "Led"
-      value_template: "{{ is_state('sensor.mi_1_sensor_led', 'True') }}"
+      value_template: "{{ is_state('sensor.mi_1_sensor_led', 'False') }}"
       turn_on:
         service: xiaomi_miio.fan_set_led_on
         data:
@@ -31,7 +31,7 @@
         data:
           entity_id: fan.xiaomi_air_purifier_2s_1
       icon_template: >-
-                {% if is_state('sensor.mi_1_sensor_led', 'True') %}
+                {% if is_state('sensor.mi_1_sensor_led', 'False') %}
                   mdi:led-off
                 {% else %}
                   mdi:led-on
@@ -54,4 +54,23 @@
                   mdi:volume-high
                 {% else %}
                   mdi:volume-mute
+                {% endif %}
+- platform: template
+  switches:
+    mi_1_switch_led:
+      friendly_name: "On/Off"
+      value_template: "{{ is_state('fan.xiaomi_air_purifier_2s_1', 'on') }}"
+      turn_on:
+        service: fan.turn_on
+        data:
+          entity_id: fan.xiaomi_air_purifier_2s_1
+      turn_off:
+        service: fan.turn_off
+        data:
+          entity_id: fan.xiaomi_air_purifier_2s_1
+      icon_template: >-
+                {% if is_state('sensor.mi_1_sensor_led', 'True') %}
+                  mdi:led-off
+                {% else %}
+                  mdi:led-on
                 {% endif %}
